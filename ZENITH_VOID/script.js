@@ -9,7 +9,6 @@ let keys = {};
 let running = false;
 let paused = false;
 
-
 const player = {
     x: canvas.width / 2,
     y: canvas.height - 100,
@@ -36,33 +35,41 @@ player.spriteThrust.src = 'spaceships/spaceship2/spaceship2_48x48.png';
 
 // Starfield
 const stars = [];
-for (let i = 0; i < 160; i++) {
+for (let i = 0; i < 200; i++) {
+    const layer = 1 + Math.floor(Math.random() * 3);
     stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.6,
-        speed: 0.4 + Math.random() * 1.1,
-        layer: 1 + Math.round(Math.random() * 2)
+        layer,
+        size: 
+            layer === 1 ? Math.random() * 1.2 :
+            layer === 2 ? Math.random() * 1.6 + 0.5 :
+            Math.random() * 2 + 0.8,
+        speed: 
+            layer === 1 ? 0.4 :
+            layer === 2 ? 0.9 :
+            1.4
     });
 }
 function updateStars() {
     stars.forEach(s => {
-        s.y += s.speed * (s.layer * 0.4);
-        if (s.y > canvas.height) { s.y = -2; s.x = Math.random() * canvas.width; }
+        s.y += s.speed * (s.layer * 0.6);
+        if (s.y > canvas.height) {
+            s.y = -4;
+            s.x = Math.random() * canvas.width;
+        }
     });
 }
 function drawStars() {
-    ctx.fillStyle = '#a8a8a8';
     stars.forEach(s => {
-        if (s.layer === 1) ctx.fillRect(s.x, s.y, s.size, s.size);
-    });
-    ctx.fillStyle = '#dbe6ff';
-    stars.forEach(s => {
-        if (s.layer === 2) ctx.fillRect(s.x, s.y, s.size + 0.6, s.size + 0.6);
-    });
-    ctx.fillStyle = '#ffffff';
-    stars.forEach(s => {
-        if (s.layer === 3) ctx.fillRect(s.x, s.y, s.size + 1, s.size + 1);
+        if (s.layer === 1) {
+            ctx.fillStyle = 'rgba(255, 245, 187,0.55)';
+        } else if (s.layer === 2) {
+            ctx.fillStyle = 'rgba(255, 245, 187,0.85)';
+        } else {
+            ctx.fillStyle = 'rgba(255, 245, 187, 0.7)';
+        }
+        ctx.fillRect(s.x, s.y, s.size, s.size);
     });
 }
 const asteroids = [];
@@ -376,7 +383,6 @@ function spawnDashParticles(x, y) {
 function draw() {
     ctx.fillStyle = 'rgba(0,0,0,0.25)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     drawStars();
     asteroids.forEach(a => drawAsteroid(a));
     player.bullets.forEach(b => {
@@ -416,8 +422,6 @@ function draw() {
         ctx.lineWidth = 1;
         ctx.strokeRect(x, y, meterWidth, meterHeight);
     }
-
-    drawStars();
     asteroids.forEach(a => drawAsteroid(a));
     player.bullets.forEach(b => { /* ... */ });
     drawParticles();
@@ -521,7 +525,7 @@ document.addEventListener('keydown', e => {
 
 function selectMenuOption() {
     const option = menuOptions[selectedOption];
-    switch(option) {
+    switch (option) {
         case 'Singleplayer':
             gameState = 'playing';
             running = true;
@@ -587,6 +591,7 @@ function mainLoop(t) {
     draw();
     updateHUD();
     requestAnimationFrame(mainLoop);
+    updateStars();
 }
 updateHUD();
 lastAsteroid = performance.now() - 400;
