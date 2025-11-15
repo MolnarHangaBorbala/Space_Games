@@ -39,8 +39,8 @@
     --btn-shadow: 0 0 25px var(--btn-shadow-color), inset 0 0 15px rgba(0, 255, 255, 0.15);
     --hover-btn-color: #00ffcc;
     --default-btn-color: #cce7ff;
-    --font-size: 64px;
-    --font-weight: 700;
+    --font-size: 40px;
+    --font-weight: 200;
     --font-family: Menlo, Roboto Mono, monospace;
     border-radius: 18px;
     box-sizing: border-box;
@@ -58,6 +58,7 @@
     position: relative;
     letter-spacing: var(--btn-letter-spacing);
     text-transform: uppercase;
+    margin: 30px auto;
 }
 
 /* Add twinkling star effect on background */

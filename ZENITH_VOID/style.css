@@ -9,6 +9,8 @@ body {
     margin: 0;
     background: #000;
     font-family: Rawcun, monospace;
+    cursor: url("../PLANET_MERGE/img/cur/tile_0086.png"), auto;
+    user-select: none;
 }
 
 canvas {
@@ -72,7 +74,7 @@ button {
 }
 
 button:hover {
-    filter: brightness(1.05)
+    filter: brightness(1.05);
 }
 
 #menuOverlay {
@@ -113,6 +115,7 @@ button:hover {
     cursor: pointer;
     box-shadow: 0 0 15px #00f0ff55;
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: url("../PLANET_MERGE/img/cur/tile_0097.png"), auto;
 }
 
 #menuOverlay button:hover {
