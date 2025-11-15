@@ -24,7 +24,7 @@ const player = {
     speed: 0.25,
     friction: 0.92,
     dashPower: 240,
-    dashCooldown: 2000,
+    dashCooldown: 3000,
     lastDash: 0,
     shootCooldown: 500,
     lastShot: 0
@@ -34,25 +34,25 @@ player.spriteIdle.src = 'spaceships/spaceship2/spaceship2_48x48.png';
 player.spriteThrust.src = 'spaceships/spaceship2/spaceship2_48x48.png';
 
 // Starfield
-const stars = [];
+const stars2 = [];
 for (let i = 0; i < 200; i++) {
     const layer = 1 + Math.floor(Math.random() * 3);
-    stars.push({
+    stars2.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         layer,
-        size: 
+        size:
             layer === 1 ? Math.random() * 1.2 :
-            layer === 2 ? Math.random() * 1.6 + 0.5 :
-            Math.random() * 2 + 0.8,
-        speed: 
+                layer === 2 ? Math.random() * 1.6 + 0.5 :
+                    Math.random() * 2 + 0.8,
+        speed:
             layer === 1 ? 0.4 :
-            layer === 2 ? 0.9 :
-            1.4
+                layer === 2 ? 0.9 :
+                    1.4
     });
 }
 function updateStars() {
-    stars.forEach(s => {
+    stars2.forEach(s => {
         s.y += s.speed * (s.layer * 0.6);
         if (s.y > canvas.height) {
             s.y = -4;
@@ -60,8 +60,8 @@ function updateStars() {
         }
     });
 }
-function drawStars() {
-    stars.forEach(s => {
+function drawStars2() {
+    stars2.forEach(s => {
         if (s.layer === 1) {
             ctx.fillStyle = 'rgba(255, 245, 187,0.55)';
         } else if (s.layer === 2) {
@@ -250,8 +250,11 @@ function update(dt) {
     if (!player.alive) return;
 
     // HORIZONTAL MOVEMENT
-    if (keys['ArrowLeft']) player.vx -= player.speed;
-    if (keys['ArrowRight']) player.vx += player.speed;
+    const left = keys['ArrowLeft'] || keys['a'] || keys['A'];
+    const right = keys['ArrowRight'] || keys['d'] || keys['D'];
+
+    if (left) player.vx -= player.speed;
+    if (right) player.vx += player.speed;
 
     // friction
     player.vx *= player.friction;
@@ -263,8 +266,10 @@ function update(dt) {
     if (keys['Shift']) {
         const now = performance.now();
         if (now - player.lastDash >= player.dashCooldown) {
-            if (keys['ArrowLeft']) player.x -= player.dashPower;
-            if (keys['ArrowRight']) player.x += player.dashPower;
+            const left = keys['ArrowLeft'] || keys['a'] || keys['A'];
+            const right = keys['ArrowRight'] || keys['d'] || keys['D'];
+            if (left) player.x -= player.dashPower;
+            if (right) player.x += player.dashPower;
             player.x = clamp(player.x, 0, canvas.width - player.w);
             spawnDashParticles(player.x + player.w / 2, player.y - 10);
             player.lastDash = now;
@@ -272,7 +277,9 @@ function update(dt) {
     }
 
     // SHOOTING
-    if (keys[' ']) {
+    const shoot = keys['w'] || keys['W'] || keys['ArrowUp'];
+
+    if (shoot) {
         const now = performance.now();
         if (now - player.lastShot >= player.shootCooldown) {
             player.bullets.push({
@@ -380,10 +387,10 @@ function spawnDashParticles(x, y) {
 }
 
 // Draw
-function draw() {
+function draw2() {
     ctx.fillStyle = 'rgba(0,0,0,0.25)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    drawStars();
+    drawStars2();
     asteroids.forEach(a => drawAsteroid(a));
     player.bullets.forEach(b => {
         ctx.save();
@@ -409,8 +416,8 @@ function draw() {
     function drawDashMeter() {
         const meterWidth = 40;
         const meterHeight = 5;
-        const x = 425;
-        const y = 62;
+        const x = 25;
+        const y = 25;
         const now = performance.now();
         const dashRemaining = Math.max(0, player.dashCooldown - (now - player.lastDash));
         const fraction = 1 - dashRemaining / player.dashCooldown;
@@ -458,7 +465,7 @@ function showMenu(type = 'start') {
         <h1>ZENITH VOID</h1>
         ${type === 'start' ? '<button id="startBtn">Start Game</button>' : ''}
         ${type === 'pause' ? '<button id="resumeBtn">Resume</button>' : ''}
-        <button id="restartBtn">Restart</button>
+        <button id="spaceshipBtn">Spaceships</button>
     `;
 
     menu.classList.remove('hidden');
@@ -588,7 +595,7 @@ function mainLoop(t) {
     const dt = t - lastTime;
     lastTime = t;
     if (running) update(dt);
-    draw();
+    draw2();
     updateHUD();
     requestAnimationFrame(mainLoop);
     updateStars();
