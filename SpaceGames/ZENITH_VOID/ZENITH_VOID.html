@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ZENITH_VOID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="stars-bg"></canvas>
+    <canvas id="game" width="750" height="800"></canvas>
+    <div id="overlay">
+        <div id="hud" class="small">
+            <div class="big" id="score">Score: 0</div>
+            <div id="hp">HP: 5</div>
+            <div id="dashCooldownEl">DASH(sec):</div>
+        </div>
+    </div>
+    <div id="controls-overlay">
+        <p>Controls:</p>
+        <ul>
+            <li>Move: ←/→ OR A/D </li>
+            <li>Dash: Shift (3 second cooldown)</li>
+            <li>Shoot: ↑ OR W</li>
+            <li>Pause: Esc</li>
+        </ul>
+    </div>
+    <script src="script.js"></script>
+    <script src="js/stars.js"></script>
+</body>
+
+</html>
