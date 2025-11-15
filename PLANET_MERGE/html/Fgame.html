@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Merge</title>
+    <link rel="stylesheet" href="../css/Fstyle.css">
+    <link rel="stylesheet" href="../css/radialmenu.css">
+    <link rel="shortcut icon" href="../img/icons8-planet-32.png" type="image/x-icon">
+</head>
+
+<body id="body-div">
+    <div id="radial-menu">
+        <div class="menu-btn" data-action="cancel" data-label="Cancel">❌</div>
+        <div class="menu-btn" data-action="organize" data-label="Organize" onclick="playSCSFX(), organize()">📦</div>
+        <div class="menu-btn" data-action="chat" data-label="Chat" id="chat-icon-div" onclick="playSCSFX()">💬</div>
+        <div class="menu-btn" data-action="planets" data-label="Planets" onclick="playSCSFX(), openplanets()">🪐</div>
+        <div class="menu-btn" data-action="players" data-label="Players" onclick="playSCSFX(), togglePlayers()">👥</div>
+        <div class="menu-btn" data-action="leaderboard" data-label="Leaderboard" onclick="playSCSFX(), openleaderboard()">🏆</div>
+        <div class="menu-btn" data-action="music" data-label="Music" onclick="toggleSound(), playSCSFX()">🔊</div>
+    </div>
+
+    <div class="custom-cursor"></div>
+    <canvas id="stars-canvas"></canvas>
+
+    <div id="score-div">
+        <p id="score-text">SCORE:</p><span id="score">0pts</span>
+    </div>
+
+    <div id="planet-size-box">
+        <canvas id="planet-size-canvas"></canvas>
+    </div>
+
+    <div id="leaderboard-div">
+        <div id="LBtext-div">
+            <h3>Leaderboard</h3>
+        </div>
+        <div id="LB-inner-div">
+            <ul id="LB-list"></ul>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="overlay-canvas"></canvas>
+    </div>
+
+    <!-- Preview outside the game container -->
+    <div id="preview-container">
+        <div id="PCtext-div">
+            <p id="preview-label">Current planet</p>
+        </div>
+        <canvas id="next-planet-preview"></canvas>
+        <button id="toggle-physics">
+            <span id="physicT"></span>
+        </button>
+        <div class="tooltip">
+            <button id="change-name-btn" onclick="setPlayerName(), playSCSFX()">
+                <span id="change-name-text">Change Name</span>
+                <span class="tooltiptext">Change your user name. <br> <u id="red-text">The page will reload after
+                        changing the name.</u> <br> <b>Current name: <span id="player-name"></span></b></span>
+            </button>
+        </div>
+        <div id="player-counter" class="players-counter tooltip" onclick="playSCSFX(), togglePlayers()">
+            <span id="players-online-text">Loading players...</span>
+            <span class="tooltiptext">Click to see online players</span>
+        </div>
+        <div class="tooltip">
+            <button id="delete-s-planets" class="disabled" onclick="DISABLE()">
+                <span id="deleteT">Delete</span>
+                <span class="tooltiptext">Removes all Ceres, Vesta, and Pallas planets (first three stages). <br> <b
+                        id="yellow-text">
+                        Unlocked with Solara. </b></span>
+            </button>
+        </div>
+    </div>
+
+    <div id="chat-container">
+        <div id="chat-header">
+            <h3 id="chat-title">Global Chat</h3>
+            <button id="chat-toggle">−</button>
+        </div>
+        <div id="chat-messages"></div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message..." maxlength="200">
+            <button id="chat-send">Send</button>
+        </div>
+    </div>
+
+    <div id="players-container">
+        <div id="players-header">
+            <h3 id="players-title">Players Online</h3>
+            <button id="players-toggle" onclick="togglePlayers()">−</button>
+        </div>
+        <div id="players-online-list"></div>
+    </div>
+
+    <audio id="game-over-sfx" src="../sfx/game-over.mp3" preload="auto"></audio>
+    <audio id="merge-sfx" src="../sfx/merge.mp3" preload="auto"></audio>
+    <audio id="spawn-sfx" src="../sfx/spawn.mp3" preload="auto"></audio>
+    <audio id="soft-click-sfx" src="../sfx/soft-click.mp3" preload="auto"></audio>
+    <audio id="bg-music" src="../sfx/bg-music.mp3" preload="auto" loop></audio>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="../js/stars.js"></script>
+    <script src="../js/radialmenuscr.js"></script>
+    <script src="../js/Fscr.js"></script>
+</body>
+
+</html>

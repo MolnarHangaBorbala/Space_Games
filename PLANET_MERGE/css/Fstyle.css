@@ -1,0 +1,792 @@
+#red-text {
+    color: red;
+}
+
+#yellow-text {
+    color: yellow;
+}
+
+/* FONT */
+@font-face {
+    font-family: "c-space";
+    src: url(../img/font/SpaceMono-Regular.ttf);
+}
+
+html {
+    cursor: url("../img/cur/tile_0086.png"), auto;
+    user-select: none;
+    font-family: c-space;
+}
+
+html {
+    background-color: rgb(0, 3, 32);
+    overflow: hidden;
+}
+
+#body-div {
+    height: 850px;
+    margin-top: 30px;
+}
+
+/* STAR BACKGROUND */
+#stars-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    animation: blink 2s ease-in-out infinite;
+}
+
+/* GAME CONTAINER */
+#game-container {
+    position: relative;
+    width: 600px;
+    height: 800px;
+    margin: 30px auto 0 auto;
+    z-index: 1;
+    cursor: none;
+}
+
+/* OVERLAY CANVAS */
+#overlay-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* PLANET PREVIEW OUTSIDE GAME */
+#preview-container {
+    position: absolute;
+    top: 30px;
+    left: calc(55% + 300px + 30px);
+    z-index: 10;
+    text-align: center;
+    color: white;
+    top: 30px;
+    right: 30px;
+    z-index: 10;
+    width: 230px;
+    height: 230px;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: block;
+    margin-top: 5px;
+}
+
+#preview-label {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#PCtext-div {
+    height: 30px;
+    padding-top: 7px;
+    background-color: black;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+#game-container #preview-container {
+    right: 30px;
+    top: 30px;
+}
+
+#next-planet-preview {
+    height: 195px;
+    width: 180px;
+}
+
+@keyframes blink {
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 0.5;
+    }
+}
+
+/* LEFT PLANET BOX */
+#planet-size-box {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    width: 320px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    overflow-y: auto;
+    z-index: 1000;
+    opacity: 0;
+    display: none;
+}
+
+#planet-size-canvas {
+    width: 100%;
+    display: block;
+}
+
+/* SCORE */
+#score-div {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    top: 30px;
+    left: 20px;
+    width: 315px;
+    height: 40px;
+    color: aliceblue;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#score-text {
+    transform: translate(-5px, -20px);
+    font-size: 17px;
+    border: 1px solid rgb(65, 65, 65);
+    float: left;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+#score {
+    transform: translateY(-3px);
+    float: left;
+    font-size: 27px;
+    border: 1px solid rgb(65, 65, 65);
+    padding: 3px;
+    border-radius: 3px;
+}
+
+/* SCROLLBAR */
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 12px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+    background: #151b3f48;
+    border-radius: 10px;
+}
+
+/* Thumb (scroll handle) */
+::-webkit-scrollbar-thumb {
+    background-color: #424242;
+    border-radius: 10px;
+    border: 1px solid #c5c5c5;
+}
+
+/* Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+    cursor: url("../img/cur/tile_0097.png"), auto;
+}
+
+/* Toggle BTN */
+#toggle-physics,
+#delete-s-planets,
+#change-name-btn,
+#player-counter {
+    margin-top: 0px;
+    width: 230px;
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.144);
+    border: 2px solid rgba(255, 255, 255, 0.137);
+    border-radius: 7px;
+    color: rgba(245, 245, 220, 0.74);
+    padding: 7px;
+    font-family: c-space;
+    cursor: url("../img/cur/tile_0097.png"), auto;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, scale 1s ease-in-out;
+}
+
+#physicT:hover,
+#toggle-physics:hover,
+#delete-s-planets:hover,
+#change-name-btn:hover,
+#player-counter:hover {
+    color: beige;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+#toggle-physics:hover,
+#delete-s-planets:hover,
+#change-name-btn:hover,
+#player-counter:hover {
+    background-color: rgba(255, 255, 255, 0.253);
+    transform: scale(1.05);
+}
+
+#delete-s-planets,
+#change-name-btn {
+    margin-top: 10px;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Players online */
+#player-counter {
+    margin-top: 10px;
+    width: 210px !important;
+}
+
+#players-online-text {
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#player-counter:hover #players-online-text {
+    opacity: 1;
+}
+
+/* Online status indicator */
+.username.online::before {
+    content: "●";
+    color: #4CAF50;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.username.offline::before {
+    content: "●";
+    color: #666;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+/* CHANGE NAME BUTTON */
+#change-name-div {
+    position: absolute;
+    text-align: center;
+    z-index: 1000;
+}
+
+/* Leaderboard */
+#leaderboard-div {
+    position: absolute;
+    left: 20px;
+    top: 425px;
+    height: 300px;
+    width: 320px;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    z-index: 1000;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+}
+
+#leaderboard-div h3 {
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: aliceblue;
+    padding: 5px;
+    border-radius: 6px 6px 0px 0px;
+    background: rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    transform: translateY(10px) translateX(-5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#LBtext-div {
+    background-color: rgb(0, 0, 0);
+    height: 45px;
+    top: 0;
+    width: 340px;
+    border-radius: 15px 15px 0px 0px;
+    transform: translateY(-10px) translateX(-10px);
+    position: sticky;
+    z-index: 10;
+}
+
+#LB-inner-div {
+    position: absolute;
+    padding: none;
+    min-height: 250px;
+    height: fit-content;
+    width: 315px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 0px 0px 6px 6px;
+}
+
+#LB-list li {
+    color: rgba(104, 104, 104, 0.856);
+    font-size: 20px;
+    border-bottom: 1px solid gray;
+    padding: 5px 0px 10px 10px;
+    transition: color 0.2s ease, background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+    font-weight: normal;
+    width: 300px;
+}
+
+#LB-list {
+    list-style: none;
+    transform: translateX(-35px);
+}
+
+#LB-list li:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+    cursor: url("../img/cur/tile_0097.png"), auto;
+    border-radius: 0px 0px 10px 10px;
+    color: rgb(170, 170, 170);
+    text-shadow: 2px 2px 4px rgba(170, 170, 170, 0.6);
+}
+
+#LB-list li:nth-of-type(odd) {
+    background: rgba(56, 56, 56, 0.2);
+}
+
+#LB-list li:nth-of-type(odd):hover {
+    background: rgba(114, 114, 114, 0.2);
+    transition: color 0.2s ease;
+}
+
+/* 1st */
+#LB-list li:nth-of-type(1) {
+    color: rgba(255, 217, 0, 0.7);
+}
+
+#LB-list li:nth-of-type(1):hover {
+    color: gold;
+    text-shadow: 2px 2px 4px rgba(255, 217, 0, 0.6);
+}
+
+/* 2nd */
+#LB-list li:nth-of-type(2) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#LB-list li:nth-of-type(2):hover {
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+/* 3rd */
+#LB-list li:nth-of-type(3) {
+    color: rgba(205, 127, 50, 0.7);
+}
+
+#LB-list li:nth-of-type(3):hover {
+    color: rgb(205, 127, 50);
+    text-shadow: 2px 2px 4px rgba(205, 127, 50, 0.6);
+}
+
+.leaderboard-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.leaderboard-tooltip.show {
+    opacity: 1;
+}
+
+/* DELETE BUTTON */
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltiptext {
+    border: 1px solid rgb(150, 150, 150);
+    visibility: hidden;
+    background: rgba(0, 0, 0, 0.92);
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 12px;
+    position: absolute;
+    z-index: 100;
+
+    left: 50%;
+    opacity: 0;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none;
+}
+
+.tooltiptext {
+    transform: translateX(-50%);
+    width: 260px;
+    top: 120%;
+}
+
+.tooltip:hover .tooltiptext,
+.tooltip:focus-within .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* CURSOR */
+.noCursor {
+    cursor: none;
+    display: none;
+}
+
+/* ORGANIZE ICON */
+.organize-container {
+    left: 355px;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    bottom: 120px;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    z-index: 1000;
+    cursor: url("../img/cur/tile_0097.png"), auto;
+}
+
+#organize-icon {
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+    padding: 5px;
+}
+
+.organize-container:hover #organize-icon {
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* ONLINE PLAYERS CONTAINER */
+#players-container {
+    position: absolute;
+    left: 368px;
+    top: 30px;
+    width: 280px;
+    height: 390px;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    z-index: 1000;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    cursor: url("../img/cur/move.png"), auto;
+    transition: opacity 0.2s ease-in-out;
+    display: none;
+}
+
+#players-container.show {
+    opacity: 1;
+}
+
+.player-name:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.212);
+    border-radius: 8px 8px 0 0;
+}
+
+.player-name:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.player-name:nth-child(odd) {
+    background: rgba(88, 88, 88, 0.2);
+}
+
+.player-name:nth-child(even) {
+    background: rgba(36, 36, 36, 0.2);
+}
+
+@keyframes terminal-glitch {
+
+    0%,
+    90%,
+    100% {
+        text-shadow: 0 0 3px rgba(51, 255, 51, 0.8);
+        transform: translateX(0);
+        color: #33ff33;
+    }
+
+    95% {
+        text-shadow: 2px 0 0 #ff0040, -2px 0 0 #33ff33, 0 0 3px rgba(51, 255, 51, 0.8);
+        transform: translateX(-2px);
+        color: #44ff44;
+    }
+
+    97% {
+        text-shadow: -1px 0 0 #ff0040, 1px 0 0 #33ff33, 0 0 3px rgba(51, 255, 51, 0.8);
+        transform: translateX(1px);
+        color: #22ff22;
+    }
+}
+
+.player-name {
+    font-family: 'Share Tech Mono', monospace;
+    color: #33ff33;
+    font-size: 15px;
+    text-shadow: 0 0 3px rgba(51, 255, 51, 0.8);
+    background: rgba(0, 51, 0, 0.1);
+    padding: 4px 8px;
+    border-left: 2px solid #33ff33;
+    animation: terminal-glitch 4s infinite;
+    font-size: 15px;
+}
+
+.player-name::before {
+    content: "> ";
+    color: #66ff66;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* GLOBAL CHAT CONTAINER */
+#chat-container {
+    position: absolute;
+    left: calc(55% + 240px);
+    top: 445px;
+    width: 320px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.068);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    z-index: 1000;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    cursor: url("../img/cur/tile_0086.png"), auto;
+    transition: opacity 0.2s ease-in-out;
+    display: none;
+}
+
+#chat-container.show,
+#players-container.show,
+#leaderboard-div.show,
+#planet-size-box.show {
+    opacity: 1;
+    cursor: url("../img/cur/move.png"), auto;
+    display: block;
+}
+
+#chat-container.dragging,
+#players-container.dragging,
+#leaderboard-div.dragging,
+#planet-size-box.dragging {
+    cursor: url("../img/cur/movefull.png"), move;
+}
+
+#chat-header,
+#players-header {
+    background: rgb(0, 0, 0);
+    height: 45px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#chat-title,
+#players-title {
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#chat-toggle,
+#players-toggle {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+    cursor: url("../img/cur/tile_0097.png"), auto;
+    font-family: c-space;
+    transition: color 0.2s ease;
+}
+
+#chat-toggle:hover,
+#players-toggle:hover {
+    color: white;
+}
+
+#chat-messages,
+#players-online-list {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.02);
+    max-height: 280px;
+}
+
+.chat-message {
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    animation: fadeInMessage 0.3s ease-out;
+}
+
+.chat-message .username {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-right: 8px;
+}
+
+.chat-message .message-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.chat-message .timestamp {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 8px;
+}
+
+.system-message {
+    background: rgba(255, 193, 7, 0.1);
+    border-left-color: #FFC107;
+    font-style: italic;
+}
+
+.system-message .username {
+    color: #FFC107;
+}
+
+#chat-input-container {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 8px;
+    z-index: 9999;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-family: c-space;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    cursor: url("../img/cur/input-cur.png"), auto;
+}
+
+#chat-input:focus {
+    border-color: rgba(76, 175, 80, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#chat-send {
+    padding: 8px 16px;
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 6px;
+    color: white;
+    font-family: c-space;
+    font-size: 14px;
+    cursor: url("../img/cur/tile_0097.png"), auto;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#chat-send:hover {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: rgba(76, 175, 80, 0.6);
+}
+
+#chat-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chat-minimized #chat-messages,
+.chat-minimized #chat-input-container {
+    display: none;
+}
+
+@keyframes fadeInMessage {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification badge */
+#chat-notification {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
